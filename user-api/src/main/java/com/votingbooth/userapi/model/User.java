@@ -19,4 +19,16 @@ public class User {
 
     @Column(name = "created_at", nullable = false)
     private Instant createdAt;
+
+    public User() {}
+
+    public User(String email) {
+        this.id = UUID.randomUUID();
+        this.email = email;
+        this.createdAt = Instant.now();
+    }
+
+    public UUID getId() {
+        return id;
+    }
 }
