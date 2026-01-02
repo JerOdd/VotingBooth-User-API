@@ -2,6 +2,8 @@ package com.votingbooth.userapi.service;
 
 import com.votingbooth.userapi.dataaccess.UserIdentityRepository;
 import com.votingbooth.userapi.dataaccess.UserRepository;
+import com.votingbooth.userapi.model.user.UserNotFoundException;
+import com.votingbooth.userapi.model.user.UserResponse;
 import com.votingbooth.userapi.model.useridentity.AuthProvider;
 import com.votingbooth.userapi.model.useridentity.UserIdentityRequest;
 import com.votingbooth.userapi.model.useridentity.UserIdentityResponse;
@@ -51,5 +53,23 @@ public class UserServiceTests {
         );
         UserIdentityResponse response3 = userService.handleUserIdentity(request3);
         assertNotEquals(userId, response3.getUserId());
+    }
+
+    @Test
+    void getUserId() {
+        UserIdentityRequest request = new UserIdentityRequest(
+                AuthProvider.GOOGLE,
+                "12345",
+                "12345@gmail.com"
+        );
+        UserIdentityResponse response = userService.handleUserIdentity(request);
+        UUID userId = response.getUserId();
+
+        UserResponse userResponse = userService.getUser(userId);
+        assertEquals("12345@gmail.com", userResponse.getUser().getEmail());
+
+        assertThrows(UserNotFoundException.class, () -> {
+            userService.getUser(UUID.randomUUID());
+        });
     }
 }
