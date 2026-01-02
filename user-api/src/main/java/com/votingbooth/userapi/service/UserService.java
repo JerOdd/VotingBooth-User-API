@@ -6,6 +6,7 @@ import com.votingbooth.userapi.model.User;
 import com.votingbooth.userapi.model.useridentity.UserIdentity;
 import com.votingbooth.userapi.model.useridentity.UserIdentityRequest;
 import com.votingbooth.userapi.model.useridentity.UserIdentityResponse;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,8 @@ public class UserService {
     @Autowired
     private UserIdentityRepository userIdentityRepository;
 
-    public UserIdentityResponse checkUserIdentity(UserIdentityRequest userIdentityRequest) {
+    @Transactional
+    public UserIdentityResponse handleUserIdentity(UserIdentityRequest userIdentityRequest) {
         UserIdentity userIdentity = userIdentityRepository.findByProviderAndProviderUserId(
                 userIdentityRequest.getProvider(),
                 userIdentityRequest.getProviderUserId()

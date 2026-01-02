@@ -15,7 +15,7 @@ public class UserIdentityController {
 
     @PostMapping
     public ResponseEntity<UserIdentityResponse> checkUserIdentity(UserIdentityRequest userIdentityRequest) {
-        UserIdentityResponse userIdentityResponse = userService.checkUserIdentity(userIdentityRequest);
+        UserIdentityResponse userIdentityResponse = userService.handleUserIdentity(userIdentityRequest);
         return ResponseEntity.ok(userIdentityResponse);
     }
 }
