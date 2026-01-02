@@ -1,4 +1,4 @@
-package com.votingbooth.userapi.model;
+package com.votingbooth.userapi.model.user;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,5 +30,9 @@ public class User {
 
     public UUID getId() {
         return id;
+    }
+
+    public String getEmail() {
+        return email;
     }
 }

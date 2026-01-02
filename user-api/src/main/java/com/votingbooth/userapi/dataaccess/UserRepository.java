@@ -1,6 +1,6 @@
 package com.votingbooth.userapi.dataaccess;
 
-import com.votingbooth.userapi.model.User;
+import com.votingbooth.userapi.model.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
